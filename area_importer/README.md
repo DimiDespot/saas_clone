@@ -1,0 +1,1 @@
+POST http://localhost:9200/import_areas

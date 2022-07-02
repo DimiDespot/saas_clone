@@ -1,0 +1,170 @@
+version: "3.3"
+services:
+  zookeeper:
+    container_name: zookeeper
+    image: custom/zookeeper
+    build:
+        context: ./kafka
+        dockerfile: Zookeeper-Dockerfile
+    ports:
+      - "2181:2181"
+    volumes:
+    - ./kafka/config/zookeeper.properties:/kafka/config/zookeeper.properties
+
+  kafka-broker:
+      container_name: kafka-broker
+      image: custom/kafka
+      build:
+        context: ./kafka
+        dockerfile: Kafka-Dockerfile
+      ports:
+        - "9092:9092"
+      volumes:
+      - ./kafka/config/server.properties:/kafka/config/server.properties
+      - ./kafka/scripts:/kafka/scripts
+      depends_on:
+      - zookeeper
+      # command: bash ./kafka/scripts/create-topics.sh
+#
+#  service-1:
+#    container_name: service-1
+#    image: node
+#    working_dir: /app
+#      #build:
+#      #context:
+#      #./microservice01
+#    volumes:
+#      - ./microservice01:/app
+#      #ports:
+#      #- '9094:9094'
+#    stdin_open: true
+#    tty: true
+#
+#  service-2:
+#    container_name: service-2
+#    image: node
+#    working_dir: /app
+#      #build:
+#      #context:
+#      #./microservice01
+#    volumes:
+#      - ./microservice02:/app
+#      #ports:
+#      #- '9095:9095'
+#    stdin_open: true
+#    tty: true
+#
+#  timer_tester1:
+#    container_name: timer_tester1
+#    image: node
+#    working_dir: /app
+#      #build:
+#      #context:
+#      #./microservice01
+#    volumes:
+#      - ./timer_tester1:/app
+#      #ports:
+#      #- '9095:9095'
+#    stdin_open: true
+#    tty: true
+
+#  cron_timer:
+#    container_name: cron_timer
+#    image: node
+#    working_dir: /app
+#      #build:
+#      #context:
+#    #./microservice01
+#    volumes:
+#      - ./cron_timer:/app
+#      #ports:
+#      #- '9095:9095'
+#    stdin_open: true
+#    tty: true
+
+  postgres-db:
+    container_name: postgres-db
+    image: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: passw0rd # sensitive info here. Maybe use file?
+    volumes:
+      - ./databases/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+      - ./databases/dumps:/dumps
+    ports:
+      - '5432:5432'
+
+#  pg-connect-service:
+#    container_name: pg-connect-service
+#    image: node
+#    working_dir: /app
+#    volumes:
+#      - ./PGconnectService:/app
+#    stdin_open: true
+#    tty: true
+
+  atl_importer:
+    container_name: atl_importer
+    image: node
+    working_dir: /app
+    volumes:
+      - ./atl_importer:/app
+    ports:
+      - '9201:9201'
+    stdin_open: true
+    tty: true
+    command: npm start
+  
+  area_manager:
+    container_name: area_manager
+    image: node
+    working_dir: /app
+    volumes:
+      - ./area_manager:/app
+    ports:
+      - '9100:9100'
+    stdin_open: true
+    tty: true
+    command: npm start
+
+  atl_manager:
+    container_name: atl_manager
+    image: node
+    working_dir: /app
+      #build:
+      #context:
+    #./microservice01
+    volumes:
+      - ./atl_manager:/app
+    ports:
+      - '9101:9101'
+    stdin_open: true
+    tty: true
+    command: npm start
+
+  area_importer:
+    container_name: area_importer
+    image: node
+    working_dir: /app
+    volumes:
+      - ./area_importer:/app
+    ports:
+    - '9200:9200'
+    stdin_open: true
+    tty: true
+    command: npm start
+
+  user_manager:
+    container_name: user_manager
+    image: node
+    working_dir: /app
+      #build:
+    #context:
+    #./microservice01
+    volumes:
+      - ./user_manager:/app
+    ports:
+      - '8400:8400'
+    stdin_open: true
+    tty: true
+    command: npm start

@@ -1,0 +1,1 @@
+POST http://localhost:9201/import_atl/:yyyymmddhh

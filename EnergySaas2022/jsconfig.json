@@ -1,0 +1,76 @@
+{
+    "compilerOptions": {
+        "baseUrl": ".",
+        "paths": {
+            "@/*": [
+                "./src/*"
+            ],
+            "@": [
+                "./src"
+            ],
+            "@logs/*": [
+                "./src/logs/*"
+            ],
+            "@logs": [
+                "./src/logs"
+            ],
+            "@hooks/*": [
+                "./src/hooks/*"
+            ],
+            "@hooks": [
+                "./src/hooks"
+            ],
+            "@contexts/*": [
+                "./src/contexts/*"
+            ],
+            "@contexts": [
+                "./src/contexts"
+            ],
+            "@pages/*": [
+                "./src/pages/*"
+            ],
+            "@pages": [
+                "./src/pages"
+            ],
+            "@utils/*": [
+                "./src/utils/*"
+            ],
+            "@utils": [
+                "./src/utils"
+            ],
+            "@router/*": [
+                "./src/router/*"
+            ],
+            "@router": [
+                "./src/router"
+            ],
+            "@layout/*": [
+                "./src/layout/*"
+            ],
+            "@layout": [
+                "./src/layout"
+            ],
+            "@components/*": [
+                "./src/components/*"
+            ],
+            "@components": [
+                "./src/components"
+            ],
+            "@configs": [
+                "./src/configs"
+            ],
+            "@config/*": [
+                "./src/config/*"
+            ],
+            "@config": [
+                "./src/config"
+            ],
+            "@User/*": [
+                "./src/contexts/User/*"
+            ],
+            "@User": [
+                "./src/contexts/User"
+            ]
+        }
+    }
+}
